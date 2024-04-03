@@ -21,7 +21,10 @@ app.use(express.json())
 app.use(express.static(__dirname))
 
 app.get('/robokassa_result', (req,res)=>{
-    logEvent(`${req.url}\t${req.json}`)
+    logEvent(`${req.url}\t${req.json}`);
+    let data = JSON.parse(req.json);
+    let invId = req.json['InvId'];
+    res.status(200).send(`OK${invId}`);
 })
 
 app.listen(PORT, ()=>{console.log(`Server running on port ${PORT}`)});
